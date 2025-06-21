@@ -104,6 +104,7 @@
         padding: 12px;
         cursor: pointer;
         border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+        color: #ffffff;
     }
     
     .autocomplete-item:hover, .autocomplete-item.selected {
@@ -184,7 +185,7 @@
                     <input type="text" id="playerInput" placeholder="Type player name...">
                     <div class="autocomplete-dropdown" id="playerDropdown"></div>
                 </div>
-                <div class="info-text">Start typing to search players</div>
+                <div class="info-text">Start typing to search from 204+ players</div>
             </div>
         </div>
         
@@ -257,129 +258,23 @@
     </div>
 </div>
 
+<script src="js/data.js"></script>
 <script>
-    // Inline NFL Data - Sample dataset for testing
-    window.NFL_DATA = {
-        "players": {
-            "Ja'Marr Chase": {
-                "team": "CIN",
-                "position": "WR",
-                "totalRoutes": 686,
-                "targetShare": 25.0,
-                "coverageStats": {
-                    "man": { "routes": 223, "sepScore": 0.211, "tprr": 0.25 },
-                    "cover2": { "routes": 101, "sepScore": 0.050, "tprr": 0.20 },
-                    "cover3": { "routes": 150, "sepScore": 0.187, "tprr": 0.29 },
-                    "cover4": { "routes": 106, "sepScore": 0.104, "tprr": 0.28 },
-                    "cover6": { "routes": 54, "sepScore": 0.130, "tprr": 0.24 }
-                }
-            },
-            "CeeDee Lamb": {
-                "team": "DAL",
-                "position": "WR",
-                "totalRoutes": 581,
-                "targetShare": 29.0,
-                "coverageStats": {
-                    "man": { "routes": 189, "sepScore": 0.148, "tprr": 0.31 },
-                    "cover2": { "routes": 89, "sepScore": 0.067, "tprr": 0.25 },
-                    "cover3": { "routes": 134, "sepScore": 0.164, "tprr": 0.33 },
-                    "cover4": { "routes": 112, "sepScore": 0.125, "tprr": 0.29 },
-                    "cover6": { "routes": 74, "sepScore": 0.108, "tprr": 0.27 }
-                }
-            },
-            "Tyreek Hill": {
-                "team": "MIA",
-                "position": "WR",
-                "totalRoutes": 539,
-                "targetShare": 27.0,
-                "coverageStats": {
-                    "man": { "routes": 167, "sepScore": 0.256, "tprr": 0.29 },
-                    "cover2": { "routes": 78, "sepScore": 0.103, "tprr": 0.23 },
-                    "cover3": { "routes": 119, "sepScore": 0.218, "tprr": 0.31 },
-                    "cover4": { "routes": 98, "sepScore": 0.183, "tprr": 0.27 },
-                    "cover6": { "routes": 80, "sepScore": 0.175, "tprr": 0.25 }
-                }
-            },
-            "Davante Adams": {
-                "team": "LV",
-                "position": "WR",
-                "totalRoutes": 567,
-                "targetShare": 24.0,
-                "coverageStats": {
-                    "man": { "routes": 156, "sepScore": 0.189, "tprr": 0.28 },
-                    "cover2": { "routes": 85, "sepScore": 0.071, "tprr": 0.22 },
-                    "cover3": { "routes": 134, "sepScore": 0.156, "tprr": 0.30 },
-                    "cover4": { "routes": 89, "sepScore": 0.112, "tprr": 0.26 },
-                    "cover6": { "routes": 57, "sepScore": 0.123, "tprr": 0.23 }
-                }
-            },
-            "Cooper Kupp": {
-                "team": "LAR",
-                "position": "WR",
-                "totalRoutes": 520,
-                "targetShare": 26.0,
-                "coverageStats": {
-                    "man": { "routes": 121, "sepScore": 0.187, "tprr": 0.33 },
-                    "cover2": { "routes": 58, "sepScore": 0.134, "tprr": 0.31 },
-                    "cover3": { "routes": 91, "sepScore": 0.201, "tprr": 0.35 },
-                    "cover4": { "routes": 84, "sepScore": 0.167, "tprr": 0.32 },
-                    "cover6": { "routes": 44, "sepScore": 0.178, "tprr": 0.29 }
-                }
-            }
-        },
-        
-        "defenseFreq": {
-            "Arizona Cardinals": { "man": 15.2, "cover2": 12.4, "cover3": 42.1, "cover4": 18.7, "cover6": 3.8 },
-            "Atlanta Falcons": { "man": 19.6, "cover2": 8.9, "cover3": 38.5, "cover4": 21.3, "cover6": 5.2 },
-            "Baltimore Ravens": { "man": 31.6, "cover2": 0.4, "cover3": 25.6, "cover4": 13.7, "cover6": 1.4 },
-            "Buffalo Bills": { "man": 19.7, "cover2": 11.3, "cover3": 35.8, "cover4": 19.4, "cover6": 3.9 },
-            "Carolina Panthers": { "man": 22.8, "cover2": 7.1, "cover3": 31.9, "cover4": 24.6, "cover6": 6.8 },
-            "Chicago Bears": { "man": 16.3, "cover2": 14.2, "cover3": 44.7, "cover4": 16.1, "cover6": 2.5 },
-            "Cincinnati Bengals": { "man": 17.9, "cover2": 9.5, "cover3": 41.2, "cover4": 17.3, "cover6": 4.1 },
-            "Cleveland Browns": { "man": 25.1, "cover2": 5.8, "cover3": 29.3, "cover4": 22.4, "cover6": 7.9 },
-            "Dallas Cowboys": { "man": 22.1, "cover2": 7.8, "cover3": 29.6, "cover4": 21.7, "cover6": 8.4 },
-            "Denver Broncos": { "man": 18.4, "cover2": 10.7, "cover3": 39.2, "cover4": 18.9, "cover6": 4.3 },
-            "Detroit Lions": { "man": 20.5, "cover2": 9.2, "cover3": 34.6, "cover4": 20.8, "cover6": 6.7 },
-            "Green Bay Packers": { "man": 18.5, "cover2": 8.2, "cover3": 38.9, "cover4": 22.1, "cover6": 4.8 },
-            "Houston Texans": { "man": 21.3, "cover2": 6.9, "cover3": 33.4, "cover4": 19.7, "cover6": 7.2 },
-            "Indianapolis Colts": { "man": 17.6, "cover2": 12.8, "cover3": 40.3, "cover4": 17.5, "cover6": 3.6 },
-            "Jacksonville Jaguars": { "man": 41.3, "cover2": 27.1, "cover3": 11.7, "cover4": 8.7, "cover6": 6.5 },
-            "Kansas City Chiefs": { "man": 24.3, "cover2": 5.7, "cover3": 32.4, "cover4": 18.9, "cover6": 6.2 },
-            "Las Vegas Raiders": { "man": 25.4, "cover2": 4.8, "cover3": 28.9, "cover4": 23.1, "cover6": 5.9 },
-            "Los Angeles Chargers": { "man": 19.8, "cover2": 9.8, "cover3": 36.7, "cover4": 19.2, "cover6": 5.1 },
-            "Los Angeles Rams": { "man": 21.6, "cover2": 7.3, "cover3": 31.5, "cover4": 22.8, "cover6": 7.4 },
-            "Miami Dolphins": { "man": 20.8, "cover2": 6.9, "cover3": 33.7, "cover4": 20.2, "cover6": 7.6 },
-            "Minnesota Vikings": { "man": 21.6, "cover2": 0.5, "cover3": 10.8, "cover4": 24.4, "cover6": 5.3 },
-            "New England Patriots": { "man": 16.9, "cover2": 13.5, "cover3": 43.2, "cover4": 15.8, "cover6": 2.9 },
-            "New Orleans Saints": { "man": 18.7, "cover2": 11.1, "cover3": 37.4, "cover4": 19.6, "cover6": 4.7 },
-            "New York Giants": { "man": 17.2, "cover2": 12.6, "cover3": 41.8, "cover4": 16.9, "cover6": 3.2 },
-            "New York Jets": { "man": 24.9, "cover2": 6.2, "cover3": 30.1, "cover4": 21.5, "cover6": 8.1 },
-            "Philadelphia Eagles": { "man": 19.3, "cover2": 8.7, "cover3": 35.9, "cover4": 20.4, "cover6": 6.3 },
-            "Pittsburgh Steelers": { "man": 26.2, "cover2": 4.1, "cover3": 26.7, "cover4": 24.6, "cover6": 9.2 },
-            "San Francisco 49ers": { "man": 18.1, "cover2": 10.4, "cover3": 38.6, "cover4": 18.3, "cover6": 4.2 },
-            "Seattle Seahawks": { "man": 22.4, "cover2": 6.5, "cover3": 29.8, "cover4": 23.2, "cover6": 8.7 },
-            "Tampa Bay Buccaneers": { "man": 16.1, "cover2": 14.7, "cover3": 46.7, "cover4": 15.6, "cover6": 2.9 },
-            "Tennessee Titans": { "man": 20.1, "cover2": 8.4, "cover3": 34.2, "cover4": 21.9, "cover6": 6.9 },
-            "Washington Commanders": { "man": 17.8, "cover2": 11.9, "cover3": 39.7, "cover4": 17.1, "cover6": 4.0 }
-        },
-        
-        "defenseStats": {
-            "Jacksonville Jaguars": {
-                "man": { "tprr": 19.0, "catchRate": 68.6 },
-                "cover2": { "tprr": 19.0, "catchRate": 80.8 },
-                "cover3": { "tprr": 20.0, "catchRate": 75.0 },
-                "cover4": { "tprr": 17.0, "catchRate": 73.8 },
-                "cover6": { "tprr": 19.0, "catchRate": 59.5 }
-            },
-            "Tampa Bay Buccaneers": {
-                "man": { "tprr": 18.2, "catchRate": 65.4 },
-                "cover2": { "tprr": 16.8, "catchRate": 62.1 },
-                "cover3": { "tprr": 19.5, "catchRate": 67.2 },
-                "cover4": { "tprr": 17.9, "catchRate": 64.8 },
-                "cover6": { "tprr": 16.3, "catchRate": 61.9 }
-            }
+    // Initialize when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if data loaded properly
+        if (typeof NFL_DATA === 'undefined') {
+            console.error('NFL_DATA not loaded');
+            alert('Data file failed to load. Please refresh the page.');
+            return;
         }
-    };
+        
+        console.log('NFL_DATA loaded successfully');
+        console.log('Players:', Object.keys(NFL_DATA.players).length);
+        console.log('Defenses:', Object.keys(NFL_DATA.defenseFreq).length);
+        
+        initializeAutocomplete();
+    });
     
     // Autocomplete functionality
     let selectedPlayerIndex = -1;
@@ -524,11 +419,13 @@
     function selectPlayer(playerName) {
         document.getElementById('playerInput').value = playerName;
         document.getElementById('playerDropdown').style.display = 'none';
+        selectedPlayerIndex = -1;
     }
     
     function selectDefense(defenseName) {
         document.getElementById('defenseInput').value = defenseName;
         document.getElementById('defenseDropdown').style.display = 'none';
+        selectedDefenseIndex = -1;
     }
     
     function calculateCoverageWeightedStats(playerStats, defenseFreq) {
@@ -612,9 +509,6 @@
         // Show results
         document.getElementById('results').style.display = 'block';
     }
-    
-    // Initialize when page loads
-    document.addEventListener('DOMContentLoaded', initializeAutocomplete);
 </script>
 ```
 
