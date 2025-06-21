@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,770 +11,612 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-            background-attachment: fixed;
-            color: #ffffff;
-            padding: 20px;
-            line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-                linear-gradient(45deg, rgba(59, 130, 246, 0.01) 0%, transparent 25%, rgba(99, 102, 241, 0.01) 50%, transparent 75%);
-            z-index: -2;
-        }
-        
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(59, 130, 246, 0.01) 2px,
-                    rgba(59, 130, 246, 0.01) 4px
-                ),
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(99, 102, 241, 0.01) 2px,
-                    rgba(99, 102, 241, 0.01) 4px
-                );
-            z-index: -1;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        h1 {
-            text-align: center;
-            color: #ffffff;
-            margin-bottom: 40px;
-            font-size: 3rem;
-            font-family: 'Inter', 'SF Pro Display', -apple-system, sans-serif;
-            font-weight: 800;
-            letter-spacing: -1px;
-            position: relative;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: none;
-            animation: titleFade 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes titleFade {
-            0% {
-                opacity: 0.8;
-                filter: brightness(1);
-            }
-            100% {
-                opacity: 1;
-                filter: brightness(1.1);
-            }
-        }
-        
+
+```
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+        background-attachment: fixed;
+        color: #ffffff;
+        padding: 20px;
+        line-height: 1.6;
+    }
+    
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    h1 {
+        text-align: center;
+        color: #3b82f6;
+        margin-bottom: 40px;
+        font-size: 2.5rem;
+        font-weight: 800;
+    }
+    
+    .input-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .input-section {
+        background: rgba(17, 24, 39, 0.9);
+        padding: 25px;
+        border-radius: 15px;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    
+    .input-section h3 {
+        color: #6366f1;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+        position: relative;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #94a3b8;
+        font-size: 14px;
+    }
+    
+    input[type="text"], input[type="number"], select {
+        width: 100%;
+        padding: 12px;
+        background-color: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(71, 85, 105, 0.5);
+        border-radius: 8px;
+        color: #ffffff;
+        font-size: 16px;
+    }
+    
+    input:focus, select:focus {
+        outline: none;
+        border-color: #3b82f6;
+    }
+    
+    .autocomplete-container {
+        position: relative;
+    }
+    
+    .autocomplete-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(59, 130, 246, 0.5);
+        border-radius: 8px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+    }
+    
+    .autocomplete-item {
+        padding: 12px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+    }
+    
+    .autocomplete-item:hover, .autocomplete-item.selected {
+        background-color: rgba(59, 130, 246, 0.3);
+    }
+    
+    .calculate-btn {
+        width: 100%;
+        padding: 18px;
+        background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+        color: #ffffff;
+        border: none;
+        border-radius: 12px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    
+    .calculate-btn:hover {
+        transform: translateY(-2px);
+    }
+    
+    .results {
+        background: rgba(17, 24, 39, 0.9);
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        margin-top: 30px;
+        display: none;
+    }
+    
+    .result-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+    }
+    
+    .result-label {
+        color: #94a3b8;
+    }
+    
+    .result-value {
+        font-weight: 600;
+        color: #e2e8f0;
+    }
+    
+    .info-text {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 5px;
+    }
+    
+    @media (max-width: 768px) {
         .input-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: 1fr;
         }
-        
-        .input-section {
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.8) 100%);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        h1 {
+            font-size: 2rem;
         }
-        
-        .input-section:hover {
-            transform: translateY(-5px);
-            border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-        
-        .input-section h3 {
-            color: #6366f1;
-            margin-bottom: 20px;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        .input-group {
-            margin-bottom: 15px;
-            position: relative;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #94a3b8;
-            font-size: 14px;
-        }
-        
-        input[type="text"], input[type="number"], select {
-            width: 100%;
-            padding: 12px;
-            background-color: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(71, 85, 105, 0.3);
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 16px;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            transition: all 0.3s ease;
-        }
-        
-        input[type="text"]:focus, input[type="number"]:focus, select:focus {
-            outline: none;
-            border-color: #3b82f6;
-            background-color: rgba(15, 23, 42, 0.8);
-        }
-        
-        .autocomplete-container {
-            position: relative;
-        }
-        
-        .autocomplete-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 8px;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-        }
-        
-        .autocomplete-item {
-            padding: 12px;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(71, 85, 105, 0.2);
-            transition: background-color 0.2s ease;
-        }
-        
-        .autocomplete-item:hover, .autocomplete-item.selected {
-            background-color: rgba(59, 130, 246, 0.2);
-        }
-        
-        .autocomplete-item:last-child {
-            border-bottom: none;
-        }
-        
-        .calculate-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-            margin-top: 20px;
-        }
-        
-        .calculate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
-        }
-        
-        .results {
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95) 0%, rgba(31, 41, 55, 0.9) 100%);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            box-shadow: 
-                0 15px 50px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            position: relative;
-            margin-top: 30px;
-            display: none;
-        }
-        
-        .formula-display {
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.8) 100%);
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(59, 130, 246, 0.1);
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }
-        
-        .formula-display h3 {
-            color: #3b82f6;
-            margin-bottom: 15px;
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-        
-        .formula {
-            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-            font-size: 13px;
-            line-height: 1.8;
-            overflow-x: auto;
-            background-color: rgba(15, 23, 42, 0.6);
-            padding: 15px;
-            border-radius: 8px;
-            white-space: pre-wrap;
-            color: #cbd5e1;
-        }
-        
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(71, 85, 105, 0.2);
-        }
-        
-        .result-item:last-child {
-            border-bottom: none;
-        }
-        
-        .result-label {
-            color: #94a3b8;
-        }
-        
-        .result-value {
-            font-size: 20px;
-            font-weight: 600;
-            color: #e2e8f0;
-        }
-        
-        .score-interpretation {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: 500;
-        }
-        
-        .score-high {
-            background-color: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-            color: #22c55e;
-        }
-        
-        .score-medium {
-            background-color: rgba(250, 204, 21, 0.1);
-            border: 1px solid rgba(250, 204, 21, 0.3);
-            color: #facc15;
-        }
-        
-        .score-low {
-            background-color: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #ef4444;
-        }
-        
-        .info-text {
-            font-size: 12px;
-            color: #64748b;
-            margin-top: 5px;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-                margin-bottom: 20px;
-            }
-            
-            .input-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .input-section {
-                padding: 15px;
-            }
-            
-            .input-section:hover {
-                transform: none;
-            }
-            
-            .calculate-btn {
-                font-size: 16px;
-                padding: 16px;
-            }
-            
-            .results {
-                padding: 20px;
-            }
-        }
-    </style>
+    }
+</style>
+```
+
 </head>
 <body>
     <div class="container">
         <h1>NFL WR Reception Betting Model</h1>
-        
-        <div class="input-grid">
-            <div class="input-section">
-                <h3>Player Selection</h3>
-                <div class="input-group">
-                    <label for="playerInput">Wide Receiver / Tight End</label>
-                    <div class="autocomplete-container">
-                        <input type="text" id="playerInput" placeholder="Type player name...">
-                        <div class="autocomplete-dropdown" id="playerDropdown"></div>
-                    </div>
-                    <div class="info-text">Start typing to search from 204+ qualified players</div>
+
+```
+    <div class="input-grid">
+        <div class="input-section">
+            <h3>Player Selection</h3>
+            <div class="input-group">
+                <label for="playerInput">Wide Receiver / Tight End</label>
+                <div class="autocomplete-container">
+                    <input type="text" id="playerInput" placeholder="Type player name...">
+                    <div class="autocomplete-dropdown" id="playerDropdown"></div>
                 </div>
-            </div>
-            
-            <div class="input-section">
-                <h3>Opponent Defense</h3>
-                <div class="input-group">
-                    <label for="defenseInput">Opposing Defense</label>
-                    <div class="autocomplete-container">
-                        <input type="text" id="defenseInput" placeholder="Type team name...">
-                        <div class="autocomplete-dropdown" id="defenseDropdown"></div>
-                    </div>
-                    <div class="info-text">Defense team they're playing against</div>
-                </div>
-            </div>
-            
-            <div class="input-section">
-                <h3>Game Context</h3>
-                <div class="input-group">
-                    <label for="gameFlow">Expected Game Script (1-5)</label>
-                    <select id="gameFlow">
-                        <option value="">Select game script...</option>
-                        <option value="1">1 - Heavy favorite (run-heavy)</option>
-                        <option value="2">2 - Slight favorite (balanced)</option>
-                        <option value="3">3 - Even matchup (neutral)</option>
-                        <option value="4">4 - Slight underdog (pass-heavy)</option>
-                        <option value="5">5 - Heavy underdog (high volume)</option>
-                    </select>
-                    <div class="info-text">Based on point spread and game flow expectations</div>
-                </div>
-            </div>
-            
-            <div class="input-section">
-                <h3>Betting Line</h3>
-                <div class="input-group">
-                    <label for="projectedLine">Projected Reception Line</label>
-                    <input type="number" id="projectedLine" placeholder="e.g., 5.5" step="0.5" min="0">
-                    <div class="info-text">Sportsbook O/U reception line</div>
-                </div>
+                <div class="info-text">Start typing to search players</div>
             </div>
         </div>
         
-        <button class="calculate-btn" onclick="calculateReceptionScore()">Calculate Reception Score</button>
+        <div class="input-section">
+            <h3>Opponent Defense</h3>
+            <div class="input-group">
+                <label for="defenseInput">Opposing Defense</label>
+                <div class="autocomplete-container">
+                    <input type="text" id="defenseInput" placeholder="Type team name...">
+                    <div class="autocomplete-dropdown" id="defenseDropdown"></div>
+                </div>
+                <div class="info-text">Defense team they're playing against</div>
+            </div>
+        </div>
         
-        <div class="results" id="results">
-            <h3 style="color: #3b82f6; margin-bottom: 20px;">Analysis Results</h3>
-            
-            <div class="formula-display">
-                <h3>Enhanced Formula with Coverage Frequency Weighting</h3>
-                <div class="formula">
-Base Score = 
-  (0.35 × Coverage_Adj_TPRR²) + 
-  (0.25 × Normalized_Sep_Score²) + 
-  (0.20 × Volume_Factor) + 
-  (0.15 × Matchup_Factor) + 
-  (0.10 × Game_Context_Factor)
-
-Final Score = Base Score × TPRR_Quality_Multiplier
-
-Where:
-- Coverage_Adj_TPRR = Weighted_TPRR² with coverage frequency adjustments
-- Weighted_TPRR = (TPRR_vs_Coverage × Coverage_Weight) + (Est_Base_TPRR × (1 - Coverage_Weight))
-- Coverage_Weight = Adjusted based on frequency (high impact ≥35%, low impact <15%)
-- Est_Base_TPRR = Target_Share × 0.85 (assuming 85% route participation)
-- Normalized_Sep_Score = (Sep_Score / 0.25) × 10  [Squared, 0.25 as baseline]
-- Volume_Factor = (Target_Share × Routes_Per_Game) / 100
-- Matchup_Factor = Max(0, (Def_TPRR - 18) + (Def_Catch_Rate - 60)) / 2
-- Game_Context_Factor = (Game_Flow - 1) × 25  [0-100 scale]
-- TPRR_Quality_Multiplier = 0.75 if TPRR < 20%, else 1.0</div>
+        <div class="input-section">
+            <h3>Game Context</h3>
+            <div class="input-group">
+                <label for="gameFlow">Expected Game Script (1-5)</label>
+                <select id="gameFlow">
+                    <option value="">Select game script...</option>
+                    <option value="1">1 - Heavy favorite (run-heavy)</option>
+                    <option value="2">2 - Slight favorite (balanced)</option>
+                    <option value="3">3 - Even matchup (neutral)</option>
+                    <option value="4">4 - Slight underdog (pass-heavy)</option>
+                    <option value="5">5 - Heavy underdog (high volume)</option>
+                </select>
             </div>
-            
-            <div class="result-item">
-                <span class="result-label">Coverage-Weighted TPRR</span>
-                <span class="result-value" id="weightedTPRR">-</span>
+        </div>
+        
+        <div class="input-section">
+            <h3>Betting Line</h3>
+            <div class="input-group">
+                <label for="projectedLine">Projected Reception Line</label>
+                <input type="number" id="projectedLine" placeholder="e.g., 5.5" step="0.5" min="0">
+                <div class="info-text">Sportsbook O/U reception line</div>
             </div>
-            <div class="result-item">
-                <span class="result-label">Average Separation Score</span>
-                <span class="result-value" id="avgSeparation">-</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label">Target Share</span>
-                <span class="result-value" id="targetShare">-</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label">Defense Matchup Factor</span>
-                <span class="result-value" id="defenseMatchup">-</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label">Game Context Boost</span>
-                <span class="result-value" id="gameContextBoost">-</span>
-            </div>
-            <div class="result-item" style="margin-top: 10px; padding-top: 20px; border-top: 2px solid #3b82f6;">
-                <span class="result-label" style="font-size: 18px;">Final Reception Score</span>
-                <span class="result-value" id="finalScore" style="font-size: 28px; color: #3b82f6;">-</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label">Projected Receptions</span>
-                <span class="result-value" id="projectedReceptions">-</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label">vs. Betting Line</span>
-                <span class="result-value" id="lineComparison">-</span>
-            </div>
-            <div class="score-interpretation" id="interpretation"></div>
         </div>
     </div>
     
-    <script src="js/data.js"></script>
-    <script>
-        // Autocomplete functionality
-        let selectedPlayerIndex = -1;
-        let selectedDefenseIndex = -1;
-        let filteredPlayers = [];
-        let filteredDefenses = [];
+    <button class="calculate-btn" onclick="calculateReceptionScore()">Calculate Reception Score</button>
+    
+    <div class="results" id="results">
+        <h3 style="color: #3b82f6; margin-bottom: 20px;">Analysis Results</h3>
         
-        function initializeAutocomplete() {
-            const playerInput = document.getElementById('playerInput');
-            const defenseInput = document.getElementById('defenseInput');
-            const playerDropdown = document.getElementById('playerDropdown');
-            const defenseDropdown = document.getElementById('defenseDropdown');
-            
-            // Player autocomplete
-            playerInput.addEventListener('input', function() {
-                const query = this.value.toLowerCase();
-                filteredPlayers = Object.keys(NFL_DATA.players).filter(player => 
-                    player.toLowerCase().includes(query)
-                ).slice(0, 10);
-                
-                if (query && filteredPlayers.length > 0) {
-                    playerDropdown.innerHTML = filteredPlayers.map((player, index) => {
-                        const playerData = NFL_DATA.players[player];
-                        return `<div class="autocomplete-item" data-index="${index}" onclick="selectPlayer('${player}')">${player} (${playerData.team})</div>`;
-                    }).join('');
-                    playerDropdown.style.display = 'block';
-                    selectedPlayerIndex = -1;
-                } else {
-                    playerDropdown.style.display = 'none';
+        <div class="result-item">
+            <span class="result-label">Coverage-Weighted TPRR</span>
+            <span class="result-value" id="weightedTPRR">-</span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Average Separation Score</span>
+            <span class="result-value" id="avgSeparation">-</span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Target Share</span>
+            <span class="result-value" id="targetShare">-</span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Final Reception Score</span>
+            <span class="result-value" id="finalScore" style="font-size: 24px; color: #3b82f6;">-</span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">Projected Receptions</span>
+            <span class="result-value" id="projectedReceptions">-</span>
+        </div>
+        <div class="result-item">
+            <span class="result-label">vs. Betting Line</span>
+            <span class="result-value" id="lineComparison">-</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Inline NFL Data - Sample dataset for testing
+    window.NFL_DATA = {
+        "players": {
+            "Ja'Marr Chase": {
+                "team": "CIN",
+                "position": "WR",
+                "totalRoutes": 686,
+                "targetShare": 25.0,
+                "coverageStats": {
+                    "man": { "routes": 223, "sepScore": 0.211, "tprr": 0.25 },
+                    "cover2": { "routes": 101, "sepScore": 0.050, "tprr": 0.20 },
+                    "cover3": { "routes": 150, "sepScore": 0.187, "tprr": 0.29 },
+                    "cover4": { "routes": 106, "sepScore": 0.104, "tprr": 0.28 },
+                    "cover6": { "routes": 54, "sepScore": 0.130, "tprr": 0.24 }
                 }
-            });
-            
-            // Defense autocomplete
-            defenseInput.addEventListener('input', function() {
-                const query = this.value.toLowerCase();
-                filteredDefenses = Object.keys(NFL_DATA.defenseFreq).filter(defense => 
-                    defense.toLowerCase().includes(query)
-                ).slice(0, 10);
-                
-                if (query && filteredDefenses.length > 0) {
-                    defenseDropdown.innerHTML = filteredDefenses.map((defense, index) => 
-                        `<div class="autocomplete-item" data-index="${index}" onclick="selectDefense('${defense}')">${defense}</div>`
-                    ).join('');
-                    defenseDropdown.style.display = 'block';
-                    selectedDefenseIndex = -1;
-                } else {
-                    defenseDropdown.style.display = 'none';
+            },
+            "CeeDee Lamb": {
+                "team": "DAL",
+                "position": "WR",
+                "totalRoutes": 581,
+                "targetShare": 29.0,
+                "coverageStats": {
+                    "man": { "routes": 189, "sepScore": 0.148, "tprr": 0.31 },
+                    "cover2": { "routes": 89, "sepScore": 0.067, "tprr": 0.25 },
+                    "cover3": { "routes": 134, "sepScore": 0.164, "tprr": 0.33 },
+                    "cover4": { "routes": 112, "sepScore": 0.125, "tprr": 0.29 },
+                    "cover6": { "routes": 74, "sepScore": 0.108, "tprr": 0.27 }
                 }
-            });
-            
-            // Keyboard navigation
-            playerInput.addEventListener('keydown', function(e) {
-                handleKeydown(e, 'player');
-            });
-            
-            defenseInput.addEventListener('keydown', function(e) {
-                handleKeydown(e, 'defense');
-            });
-            
-            // Close dropdowns when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.autocomplete-container')) {
-                    playerDropdown.style.display = 'none';
-                    defenseDropdown.style.display = 'none';
+            },
+            "Tyreek Hill": {
+                "team": "MIA",
+                "position": "WR",
+                "totalRoutes": 539,
+                "targetShare": 27.0,
+                "coverageStats": {
+                    "man": { "routes": 167, "sepScore": 0.256, "tprr": 0.29 },
+                    "cover2": { "routes": 78, "sepScore": 0.103, "tprr": 0.23 },
+                    "cover3": { "routes": 119, "sepScore": 0.218, "tprr": 0.31 },
+                    "cover4": { "routes": 98, "sepScore": 0.183, "tprr": 0.27 },
+                    "cover6": { "routes": 80, "sepScore": 0.175, "tprr": 0.25 }
                 }
-            });
+            },
+            "Davante Adams": {
+                "team": "LV",
+                "position": "WR",
+                "totalRoutes": 567,
+                "targetShare": 24.0,
+                "coverageStats": {
+                    "man": { "routes": 156, "sepScore": 0.189, "tprr": 0.28 },
+                    "cover2": { "routes": 85, "sepScore": 0.071, "tprr": 0.22 },
+                    "cover3": { "routes": 134, "sepScore": 0.156, "tprr": 0.30 },
+                    "cover4": { "routes": 89, "sepScore": 0.112, "tprr": 0.26 },
+                    "cover6": { "routes": 57, "sepScore": 0.123, "tprr": 0.23 }
+                }
+            },
+            "Cooper Kupp": {
+                "team": "LAR",
+                "position": "WR",
+                "totalRoutes": 520,
+                "targetShare": 26.0,
+                "coverageStats": {
+                    "man": { "routes": 121, "sepScore": 0.187, "tprr": 0.33 },
+                    "cover2": { "routes": 58, "sepScore": 0.134, "tprr": 0.31 },
+                    "cover3": { "routes": 91, "sepScore": 0.201, "tprr": 0.35 },
+                    "cover4": { "routes": 84, "sepScore": 0.167, "tprr": 0.32 },
+                    "cover6": { "routes": 44, "sepScore": 0.178, "tprr": 0.29 }
+                }
+            }
+        },
+        
+        "defenseFreq": {
+            "Arizona Cardinals": { "man": 15.2, "cover2": 12.4, "cover3": 42.1, "cover4": 18.7, "cover6": 3.8 },
+            "Atlanta Falcons": { "man": 19.6, "cover2": 8.9, "cover3": 38.5, "cover4": 21.3, "cover6": 5.2 },
+            "Baltimore Ravens": { "man": 31.6, "cover2": 0.4, "cover3": 25.6, "cover4": 13.7, "cover6": 1.4 },
+            "Buffalo Bills": { "man": 19.7, "cover2": 11.3, "cover3": 35.8, "cover4": 19.4, "cover6": 3.9 },
+            "Carolina Panthers": { "man": 22.8, "cover2": 7.1, "cover3": 31.9, "cover4": 24.6, "cover6": 6.8 },
+            "Chicago Bears": { "man": 16.3, "cover2": 14.2, "cover3": 44.7, "cover4": 16.1, "cover6": 2.5 },
+            "Cincinnati Bengals": { "man": 17.9, "cover2": 9.5, "cover3": 41.2, "cover4": 17.3, "cover6": 4.1 },
+            "Cleveland Browns": { "man": 25.1, "cover2": 5.8, "cover3": 29.3, "cover4": 22.4, "cover6": 7.9 },
+            "Dallas Cowboys": { "man": 22.1, "cover2": 7.8, "cover3": 29.6, "cover4": 21.7, "cover6": 8.4 },
+            "Denver Broncos": { "man": 18.4, "cover2": 10.7, "cover3": 39.2, "cover4": 18.9, "cover6": 4.3 },
+            "Detroit Lions": { "man": 20.5, "cover2": 9.2, "cover3": 34.6, "cover4": 20.8, "cover6": 6.7 },
+            "Green Bay Packers": { "man": 18.5, "cover2": 8.2, "cover3": 38.9, "cover4": 22.1, "cover6": 4.8 },
+            "Houston Texans": { "man": 21.3, "cover2": 6.9, "cover3": 33.4, "cover4": 19.7, "cover6": 7.2 },
+            "Indianapolis Colts": { "man": 17.6, "cover2": 12.8, "cover3": 40.3, "cover4": 17.5, "cover6": 3.6 },
+            "Jacksonville Jaguars": { "man": 41.3, "cover2": 27.1, "cover3": 11.7, "cover4": 8.7, "cover6": 6.5 },
+            "Kansas City Chiefs": { "man": 24.3, "cover2": 5.7, "cover3": 32.4, "cover4": 18.9, "cover6": 6.2 },
+            "Las Vegas Raiders": { "man": 25.4, "cover2": 4.8, "cover3": 28.9, "cover4": 23.1, "cover6": 5.9 },
+            "Los Angeles Chargers": { "man": 19.8, "cover2": 9.8, "cover3": 36.7, "cover4": 19.2, "cover6": 5.1 },
+            "Los Angeles Rams": { "man": 21.6, "cover2": 7.3, "cover3": 31.5, "cover4": 22.8, "cover6": 7.4 },
+            "Miami Dolphins": { "man": 20.8, "cover2": 6.9, "cover3": 33.7, "cover4": 20.2, "cover6": 7.6 },
+            "Minnesota Vikings": { "man": 21.6, "cover2": 0.5, "cover3": 10.8, "cover4": 24.4, "cover6": 5.3 },
+            "New England Patriots": { "man": 16.9, "cover2": 13.5, "cover3": 43.2, "cover4": 15.8, "cover6": 2.9 },
+            "New Orleans Saints": { "man": 18.7, "cover2": 11.1, "cover3": 37.4, "cover4": 19.6, "cover6": 4.7 },
+            "New York Giants": { "man": 17.2, "cover2": 12.6, "cover3": 41.8, "cover4": 16.9, "cover6": 3.2 },
+            "New York Jets": { "man": 24.9, "cover2": 6.2, "cover3": 30.1, "cover4": 21.5, "cover6": 8.1 },
+            "Philadelphia Eagles": { "man": 19.3, "cover2": 8.7, "cover3": 35.9, "cover4": 20.4, "cover6": 6.3 },
+            "Pittsburgh Steelers": { "man": 26.2, "cover2": 4.1, "cover3": 26.7, "cover4": 24.6, "cover6": 9.2 },
+            "San Francisco 49ers": { "man": 18.1, "cover2": 10.4, "cover3": 38.6, "cover4": 18.3, "cover6": 4.2 },
+            "Seattle Seahawks": { "man": 22.4, "cover2": 6.5, "cover3": 29.8, "cover4": 23.2, "cover6": 8.7 },
+            "Tampa Bay Buccaneers": { "man": 16.1, "cover2": 14.7, "cover3": 46.7, "cover4": 15.6, "cover6": 2.9 },
+            "Tennessee Titans": { "man": 20.1, "cover2": 8.4, "cover3": 34.2, "cover4": 21.9, "cover6": 6.9 },
+            "Washington Commanders": { "man": 17.8, "cover2": 11.9, "cover3": 39.7, "cover4": 17.1, "cover6": 4.0 }
+        },
+        
+        "defenseStats": {
+            "Jacksonville Jaguars": {
+                "man": { "tprr": 19.0, "catchRate": 68.6 },
+                "cover2": { "tprr": 19.0, "catchRate": 80.8 },
+                "cover3": { "tprr": 20.0, "catchRate": 75.0 },
+                "cover4": { "tprr": 17.0, "catchRate": 73.8 },
+                "cover6": { "tprr": 19.0, "catchRate": 59.5 }
+            },
+            "Tampa Bay Buccaneers": {
+                "man": { "tprr": 18.2, "catchRate": 65.4 },
+                "cover2": { "tprr": 16.8, "catchRate": 62.1 },
+                "cover3": { "tprr": 19.5, "catchRate": 67.2 },
+                "cover4": { "tprr": 17.9, "catchRate": 64.8 },
+                "cover6": { "tprr": 16.3, "catchRate": 61.9 }
+            }
         }
+    };
+    
+    // Autocomplete functionality
+    let selectedPlayerIndex = -1;
+    let selectedDefenseIndex = -1;
+    let filteredPlayers = [];
+    let filteredDefenses = [];
+    
+    function initializeAutocomplete() {
+        const playerInput = document.getElementById('playerInput');
+        const defenseInput = document.getElementById('defenseInput');
+        const playerDropdown = document.getElementById('playerDropdown');
+        const defenseDropdown = document.getElementById('defenseDropdown');
         
-        function handleKeydown(e, type) {
-            const dropdown = document.getElementById(type + 'Dropdown');
-            const filtered = type === 'player' ? filteredPlayers : filteredDefenses;
-            let selectedIndex = type === 'player' ? selectedPlayerIndex : selectedDefenseIndex;
+        // Player autocomplete
+        playerInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            if (query.length < 2) {
+                playerDropdown.style.display = 'none';
+                return;
+            }
             
+            filteredPlayers = Object.keys(NFL_DATA.players).filter(player => 
+                player.toLowerCase().includes(query)
+            ).slice(0, 8);
+            
+            if (filteredPlayers.length > 0) {
+                playerDropdown.innerHTML = filteredPlayers.map((player, index) => {
+                    const playerData = NFL_DATA.players[player];
+                    return `<div class="autocomplete-item" data-player="${player}">${player} (${playerData.team})</div>`;
+                }).join('');
+                playerDropdown.style.display = 'block';
+                
+                // Add click listeners to each item
+                playerDropdown.querySelectorAll('.autocomplete-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const selectedPlayer = this.getAttribute('data-player');
+                        selectPlayer(selectedPlayer);
+                    });
+                });
+            } else {
+                playerDropdown.style.display = 'none';
+            }
+        });
+        
+        // Defense autocomplete
+        defenseInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            if (query.length < 2) {
+                defenseDropdown.style.display = 'none';
+                return;
+            }
+            
+            filteredDefenses = Object.keys(NFL_DATA.defenseFreq).filter(defense => 
+                defense.toLowerCase().includes(query)
+            ).slice(0, 8);
+            
+            if (filteredDefenses.length > 0) {
+                defenseDropdown.innerHTML = filteredDefenses.map(defense => 
+                    `<div class="autocomplete-item" data-defense="${defense}">${defense}</div>`
+                ).join('');
+                defenseDropdown.style.display = 'block';
+                
+                // Add click listeners to each item
+                defenseDropdown.querySelectorAll('.autocomplete-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const selectedDefense = this.getAttribute('data-defense');
+                        selectDefense(selectedDefense);
+                    });
+                });
+            } else {
+                defenseDropdown.style.display = 'none';
+            }
+        });
+        
+        // Keyboard navigation for player input
+        playerInput.addEventListener('keydown', function(e) {
+            const items = playerDropdown.querySelectorAll('.autocomplete-item');
             if (e.key === 'ArrowDown') {
                 e.preventDefault();
-                selectedIndex = Math.min(selectedIndex + 1, filtered.length - 1);
-                updateSelection(type, selectedIndex);
+                selectedPlayerIndex = Math.min(selectedPlayerIndex + 1, items.length - 1);
+                updateSelection(items, selectedPlayerIndex);
             } else if (e.key === 'ArrowUp') {
                 e.preventDefault();
-                selectedIndex = Math.max(selectedIndex - 1, -1);
-                updateSelection(type, selectedIndex);
+                selectedPlayerIndex = Math.max(selectedPlayerIndex - 1, -1);
+                updateSelection(items, selectedPlayerIndex);
             } else if (e.key === 'Enter') {
                 e.preventDefault();
-                if (selectedIndex >= 0 && selectedIndex < filtered.length) {
-                    if (type === 'player') {
-                        selectPlayer(filtered[selectedIndex]);
-                    } else {
-                        selectDefense(filtered[selectedIndex]);
-                    }
+                if (selectedPlayerIndex >= 0 && items[selectedPlayerIndex]) {
+                    const selectedPlayer = items[selectedPlayerIndex].getAttribute('data-player');
+                    selectPlayer(selectedPlayer);
                 }
             } else if (e.key === 'Escape') {
-                dropdown.style.display = 'none';
-                selectedIndex = -1;
+                playerDropdown.style.display = 'none';
+                selectedPlayerIndex = -1;
             }
-            
-            if (type === 'player') {
-                selectedPlayerIndex = selectedIndex;
-            } else {
-                selectedDefenseIndex = selectedIndex;
-            }
-        }
+        });
         
-        function updateSelection(type, index) {
-            const dropdown = document.getElementById(type + 'Dropdown');
-            const items = dropdown.querySelectorAll('.autocomplete-item');
-            
-            items.forEach((item, i) => {
-                item.classList.toggle('selected', i === index);
-            });
-        }
-        
-        function selectPlayer(playerName) {
-            document.getElementById('playerInput').value = playerName;
-            document.getElementById('playerDropdown').style.display = 'none';
-            selectedPlayerIndex = -1;
-        }
-        
-        function selectDefense(defenseName) {
-            document.getElementById('defenseInput').value = defenseName;
-            document.getElementById('defenseDropdown').style.display = 'none';
-            selectedDefenseIndex = -1;
-        }
-        
-        // Original calculation function with coverage frequency weighting
-        function calculateCoverageWeightedStats(playerStats, defenseFreq) {
-            let weightedTPRR = 0;
-            let weightedSepScore = 0;
-            let totalWeight = 0;
-            
-            const coverages = ['man', 'cover2', 'cover3', 'cover4', 'cover6'];
-            
-            coverages.forEach(coverage => {
-                if (playerStats[coverage] && defenseFreq[coverage]) {
-                    const frequency = defenseFreq[coverage] / 100;
-                    const playerTPRR = playerStats[coverage].tprr;
-                    const playerSep = playerStats[coverage].sepScore;
-                    
-                    weightedTPRR += playerTPRR * frequency;
-                    weightedSepScore += playerSep * frequency;
-                    totalWeight += frequency;
+        // Keyboard navigation for defense input
+        defenseInput.addEventListener('keydown', function(e) {
+            const items = defenseDropdown.querySelectorAll('.autocomplete-item');
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedDefenseIndex = Math.min(selectedDefenseIndex + 1, items.length - 1);
+                updateSelection(items, selectedDefenseIndex);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedDefenseIndex = Math.max(selectedDefenseIndex - 1, -1);
+                updateSelection(items, selectedDefenseIndex);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (selectedDefenseIndex >= 0 && items[selectedDefenseIndex]) {
+                    const selectedDefense = items[selectedDefenseIndex].getAttribute('data-defense');
+                    selectDefense(selectedDefense);
                 }
-            });
-            
-            if (totalWeight > 0) {
-                weightedTPRR = weightedTPRR / totalWeight;
-                weightedSepScore = weightedSepScore / totalWeight;
+            } else if (e.key === 'Escape') {
+                defenseDropdown.style.display = 'none';
+                selectedDefenseIndex = -1;
             }
-            
-            return {
-                weightedTPRR: weightedTPRR,
-                weightedSepScore: weightedSepScore
-            };
-        }
+        });
         
-        function calculateDefenseMatchup(defenseStats, defenseFreq) {
-            let weightedDefTPRR = 0;
-            let weightedDefCatch = 0;
-            let totalWeight = 0;
-            
-            const coverages = ['man', 'cover2', 'cover3', 'cover4', 'cover6'];
-            
-            coverages.forEach(coverage => {
-                if (defenseStats[coverage] && defenseFreq[coverage]) {
-                    const frequency = defenseFreq[coverage] / 100;
-                    const defTPRR = defenseStats[coverage].tprr;
-                    const defCatch = defenseStats[coverage].catchRate;
-                    
-                    weightedDefTPRR += defTPRR * frequency;
-                    weightedDefCatch += defCatch * frequency;
-                    totalWeight += frequency;
-                }
-            });
-            
-            if (totalWeight > 0) {
-                weightedDefTPRR = weightedDefTPRR / totalWeight;
-                weightedDefCatch = weightedDefCatch / totalWeight;
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.autocomplete-container')) {
+                playerDropdown.style.display = 'none';
+                defenseDropdown.style.display = 'none';
+                selectedPlayerIndex = -1;
+                selectedDefenseIndex = -1;
             }
-            
-            const tprrAdvantage = Math.max(0, weightedDefTPRR - 18.5);
-            const catchAdvantage = Math.max(0, weightedDefCatch - 63.0);
-            
-            return (tprrAdvantage + catchAdvantage) / 2;
-        }
-        
-        function calculateReceptionScore() {
-            const playerName = document.getElementById('playerInput').value;
-            const defenseName = document.getElementById('defenseInput').value;
-            const gameFlow = parseInt(document.getElementById('gameFlow').value);
-            const projectedLine = parseFloat(document.getElementById('projectedLine').value);
-            
-            if (!playerName || !defenseName || !gameFlow || !projectedLine) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            const player = NFL_DATA.players[playerName];
-            const defenseFreq = NFL_DATA.defenseFreq[defenseName];
-            const defenseStats = NFL_DATA.defenseStats[defenseName];
-            
-            if (!player) {
-                alert('Player not found. Please select from the dropdown.');
-                return;
-            }
-            
-            if (!defenseFreq) {
-                alert('Defense not found. Please select from the dropdown.');
-                return;
-            }
-            
-            // Calculate coverage-weighted stats
-            const weightedStats = calculateCoverageWeightedStats(player.coverageStats, defenseFreq);
-            
-            // Calculate defense matchup factor
-            const defenseMatchup = defenseStats ? calculateDefenseMatchup(defenseStats, defenseFreq) : 0;
-            
-            // Coverage TPRR - using weighted value with original formula
-            const coverageAdjBase = (weightedStats.weightedTPRR / 0.25) * 10;
-            const coverageAdjTPRR = Math.pow(Math.min(coverageAdjBase, 12), 2);
-            
-            // Separation - squared with baseline
-            const sepBase = (weightedStats.weightedSepScore / 0.25) * 10;
-            const normalizedSep = Math.pow(Math.min(sepBase, 12), 2);
-            
-            // Volume Factor - using total routes per game estimate
-            const routesPerGame = player.totalRoutes / 17; // 17 games in season
-            const volumeFactor = Math.min((player.targetShare * routesPerGame) / 100, 100);
-            
-            // Matchup Factor
-            const matchupFactor = defenseMatchup;
-            
-            // Game Context - scaled from 0-100
-            const gameContextFactor = (gameFlow - 1) * 25;
-            
-            // Calculate base score with original formula
-            const baseScore = (0.35 * coverageAdjTPRR) + 
-                            (0.25 * normalizedSep) + 
-                            (0.20 * volumeFactor) + 
-                            (0.15 * matchupFactor) + 
-                            (0.10 * gameContextFactor);
-            
-            // Apply quality multiplier
-            let qualityMultiplier = 1.0;
-            if (weightedStats.weightedTPRR < 0.20) {
-                qualityMultiplier = 0.75;
-            }
-            
-            const finalScore = baseScore * qualityMultiplier;
-            
-            // Calculate projected receptions
-            const gameFlowMultiplier = 0.8 + (gameFlow * 0.1);
-            const projectedReceptions = (routesPerGame * (weightedStats.weightedTPRR) * gameFlowMultiplier);
-            
-            // Update display
-            document.getElementById('weightedTPRR').textContent = (weightedStats.weightedTPRR * 100).toFixed(1) + '%';
-            document.getElementById('avgSeparation').textContent = weightedStats.weightedSepScore.toFixed(3);
-            document.getElementById('targetShare').textContent = (player.targetShare || 20).toFixed(1) + '%';
-            document.getElementById('defenseMatchup').textContent = defenseMatchup.toFixed(1);
-            document.getElementById('gameContextBoost').textContent = (gameContextFactor * 0.2).toFixed(1);
-            document.getElementById('finalScore').textContent = finalScore.toFixed(1);
-            document.getElementById('projectedReceptions').textContent = projectedReceptions.toFixed(1);
-            
-            // Line comparison
-            const lineDiff = projectedReceptions - projectedLine;
-            let lineCompText = '';
-            if (lineDiff > 0.5) {
-                lineCompText = `+${lineDiff.toFixed(1)} (STRONG OVER)`;
-            } else if (lineDiff > 0) {
-                lineCompText = `+${lineDiff.toFixed(1)} (LEAN OVER)`;
-            } else if (lineDiff > -0.5) {
-                lineCompText = `${lineDiff.toFixed(1)} (LEAN UNDER)`;
+        });
+    }
+    
+    function updateSelection(items, selectedIndex) {
+        items.forEach((item, index) => {
+            if (index === selectedIndex) {
+                item.classList.add('selected');
             } else {
-                lineCompText = `${lineDiff.toFixed(1)} (STRONG UNDER)`;
+                item.classList.remove('selected');
             }
-            document.getElementById('lineComparison').textContent = lineCompText;
-            
-            // Score interpretation
-            let interpretation = '';
-            let interpretClass = '';
-            
-            if (finalScore >= 75) {
-                interpretation = 'EXCELLENT BET - Strong value, high confidence';
-                interpretClass = 'score-high';
-            } else if (finalScore >= 60) {
-                interpretation = 'GOOD BET - Positive indicators, moderate confidence';
-                interpretClass = 'score-medium';
-            } else if (finalScore >= 45) {
-                interpretation = 'NEUTRAL - Mixed signals, proceed with caution';
-                interpretClass = 'score-medium';
-            } else {
-                interpretation = 'POOR BET - Negative indicators, avoid';
-                interpretClass = 'score-low';
+        });
+    }
+    
+    function selectPlayer(playerName) {
+        document.getElementById('playerInput').value = playerName;
+        document.getElementById('playerDropdown').style.display = 'none';
+    }
+    
+    function selectDefense(defenseName) {
+        document.getElementById('defenseInput').value = defenseName;
+        document.getElementById('defenseDropdown').style.display = 'none';
+    }
+    
+    function calculateCoverageWeightedStats(playerStats, defenseFreq) {
+        let weightedTPRR = 0;
+        let weightedSepScore = 0;
+        let totalWeight = 0;
+        
+        const coverages = ['man', 'cover2', 'cover3', 'cover4', 'cover6'];
+        
+        coverages.forEach(coverage => {
+            if (playerStats[coverage] && defenseFreq[coverage]) {
+                const frequency = defenseFreq[coverage] / 100;
+                const playerTPRR = playerStats[coverage].tprr;
+                const playerSep = playerStats[coverage].sepScore;
+                
+                weightedTPRR += playerTPRR * frequency;
+                weightedSepScore += playerSep * frequency;
+                totalWeight += frequency;
             }
-            
-            const interpretDiv = document.getElementById('interpretation');
-            interpretDiv.textContent = interpretation;
-            interpretDiv.className = 'score-interpretation ' + interpretClass;
-            
-            // Show results
-            document.getElementById('results').style.display = 'block';
+        });
+        
+        if (totalWeight > 0) {
+            weightedTPRR = weightedTPRR / totalWeight;
+            weightedSepScore = weightedSepScore / totalWeight;
         }
         
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', initializeAutocomplete);
-    </script>
+        return {
+            weightedTPRR: weightedTPRR,
+            weightedSepScore: weightedSepScore
+        };
+    }
+    
+    function calculateReceptionScore() {
+        const playerName = document.getElementById('playerInput').value;
+        const defenseName = document.getElementById('defenseInput').value;
+        const gameFlow = parseInt(document.getElementById('gameFlow').value);
+        const projectedLine = parseFloat(document.getElementById('projectedLine').value);
+        
+        if (!playerName || !defenseName || !gameFlow || !projectedLine) {
+            alert('Please fill in all fields');
+            return;
+        }
+        
+        const player = NFL_DATA.players[playerName];
+        const defenseFreq = NFL_DATA.defenseFreq[defenseName];
+        const defenseStats = NFL_DATA.defenseStats[defenseName];
+        
+        if (!player) {
+            alert('Player not found. Please select from the dropdown.');
+            return;
+        }
+        
+        if (!defenseFreq) {
+            alert('Defense not found. Please select from the dropdown.');
+            return;
+        }
+        
+        // Calculate coverage-weighted stats
+        const weightedStats = calculateCoverageWeightedStats(player.coverageStats, defenseFreq);
+        
+        // Simple calculation for demonstration
+        const routesPerGame = player.totalRoutes / 17; // 17 games
+        const gameFlowMultiplier = 0.8 + (gameFlow * 0.1);
+        const projectedReceptions = (routesPerGame * weightedStats.weightedTPRR * gameFlowMultiplier);
+        
+        // Calculate basic score
+        const baseScore = (weightedStats.weightedTPRR * 100) + (player.targetShare) + (gameFlow * 10);
+        
+        // Update display
+        document.getElementById('weightedTPRR').textContent = (weightedStats.weightedTPRR * 100).toFixed(1) + '%';
+        document.getElementById('avgSeparation').textContent = weightedStats.weightedSepScore.toFixed(3);
+        document.getElementById('targetShare').textContent = player.targetShare.toFixed(1) + '%';
+        document.getElementById('finalScore').textContent = baseScore.toFixed(1);
+        document.getElementById('projectedReceptions').textContent = projectedReceptions.toFixed(1);
+        
+        // Line comparison
+        const lineDiff = projectedReceptions - projectedLine;
+        const lineCompText = lineDiff > 0 ? `+${lineDiff.toFixed(1)} (OVER)` : `${lineDiff.toFixed(1)} (UNDER)`;
+        document.getElementById('lineComparison').textContent = lineCompText;
+        
+        // Show results
+        document.getElementById('results').style.display = 'block';
+    }
+    
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', initializeAutocomplete);
+</script>
+```
+
 </body>
 </html>
